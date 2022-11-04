@@ -7,6 +7,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const mysql = require("mysql2");
 
+// Depreceated
 // // Create connection pool to database
 // const db = mysql.createPool({
 //   host: "localhost",
@@ -34,7 +35,6 @@ const config = {
 };
 
 const connection = mysql.createConnection(config);
-
 connection.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
@@ -52,7 +52,7 @@ connection.connect(function (err) {
 //   });
 // });
 
-app.get("/", (req, res) => {
+app.get("/api/get", (req, res) => {
   const sqlFetch = "SELECT * FROM staff";
   connection.query(sqlFetch, function (error, sqlFetch) {
     if (error) {
