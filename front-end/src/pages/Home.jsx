@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../pages/Styles.css";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [data, getData] = useState([]);
@@ -16,6 +17,18 @@ const Home = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  const deleteStaff = async (id) => {
+    try {
+      if (window.confirm("Are you sure you want to delete this staff??")) {
+        toast.success("Staff has been deleted");
+        setTimeout(() => loadData(), 500);
+        await axios.delete(`https://localhost:5000/api/remove/${id}"`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -47,9 +60,12 @@ const Home = () => {
                 <Link to={`/update/${item.id}`}>
                   <button className='btn btn-edit'>Update</button>
                 </Link>
-                <Link to={`/delete/${item.id}`}>
-                  <button className='btn btn-delete'>Delete</button>
-                </Link>
+                <button
+                  className='btn btn-delete'
+                  onClick={() => deleteStaff(item.id)}
+                >
+                  Delete
+                </button>
                 <Link to={`/view/${item.id}`}>
                   <button className='btn btn-view'>View</button>
                 </Link>

@@ -1,8 +1,9 @@
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link, Navigate } from "react-router-dom";
 import React, { useState } from "react";
 import "./AddEdit.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Initial States
 const initialState = {
@@ -16,7 +17,8 @@ const initialState = {
 const AddEdit = () => {
   const [state, setState] = useState(initialState);
   const { firstname, lastname, gender, position, dofa } = state;
-  const history = useNavigate();
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!firstname || !lastname || !gender || !position || !dofa) {
@@ -37,15 +39,17 @@ const AddEdit = () => {
             gender: "",
             position: "",
             dofa: "",
-          }).catch((error) => toast.error(error.response.data));
-          setTimeout(() => history.push("/"), 500);
+          }).catch((err) => toast.error(err.response.data));
+          setTimeout(() => navigate("/"), 500);
         });
     }
   };
+
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { firstname, value } = e.target;
     setState({ ...state, [firstname]: value });
   };
+
   return (
     <div style={{ marginTop: "100px" }}>
       <form

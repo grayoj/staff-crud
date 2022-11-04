@@ -6,6 +6,8 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const mysql = require("mysql2");
+const { application } = require("express");
+const { DOUBLE } = require("sequelize");
 
 // Depreceated
 // // Create connection pool to database
@@ -73,6 +75,35 @@ app.post("/api/post", (req, res) => {
     }
     res.send(sqlInsert);
   });
+});
+
+// app.delete("/api/remove/:id", (req, res) => {
+//   const { id } = req.params;
+//   const sqlDelete = "DELETE FROM staff WHERE id = ?";
+//   connection.query(sqlDelete, id, function (error, sqlDelete) {
+//     if (error) {
+//       console.log(error);
+//     }
+//     res.send(sqlDelete);
+//   });
+// });
+
+app.delete("/api/remove/:id", (req, res) => {
+  const staffId = req.params.id;
+  const q = "DELETE FROM staff WHERE id = ?";
+  connection.query(q, [staffId], (err, data) => {
+    if (err) return res.json(err);
+    return res.json("Deleted Staff Successfully.");
+  });
+});
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
 });
 
 const PORT = process.env.PORT || 5000;
