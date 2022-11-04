@@ -6,7 +6,7 @@ import "../pages/Styles.css";
 const Home = () => {
   const [data, getData] = useState([]);
 
-  const URL = "https://localhost:5000/";
+  // const URL = "https://localhost:5000/";
 
   const loadData = async () => {
     const response = await axios.get("http://localhost:5000/api/get");
@@ -38,7 +38,7 @@ const Home = () => {
                 <td>{item.lastname}</td>
                 <td>{item.gender}</td>
                 <td>{item.position}</td>
-                <td>{item.DOFA}</td>
+                <td>{item.dofa}</td>
                 <Link to={`/update/${item.id}`}>
                   <button className='btn btn-edit'>Update</button>
                 </Link>
