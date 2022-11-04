@@ -41,6 +41,7 @@ const Home = () => {
         <table className='styled-table'>
           <thead>
             <tr>
+              <th style={{ textAlign: "center" }}>No</th>
               <th style={{ textAlign: "center" }}>First Name</th>
               <th style={{ textAlign: "center" }}>Last Name</th>
               <th style={{ textAlign: "center" }}>Gender</th>
@@ -51,7 +52,7 @@ const Home = () => {
           <tbody>
             {data.map((item, index) => (
               <tr key={item.id}>
-                <td scope='row'>{index + 1}</td>
+                <th scope='row'>{index + 1}</th>
                 <td>{item.firstname}</td>
                 <td>{item.lastname}</td>
                 <td>{item.gender}</td>
