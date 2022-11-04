@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import AddEdit from "./pages/AddEdit";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <div className='App'>
         <Routes>
           <Route exact path='/' element={<Home />} />
-          <Route path='/addContact' component={Home} />
+          <Route path='/addStaff' element={<AddEdit />} />
         </Routes>
       </div>
     </BrowserRouter>

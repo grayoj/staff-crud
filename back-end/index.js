@@ -62,6 +62,19 @@ app.get("/api/get", (req, res) => {
   });
 });
 
+// Insert into database
+app.post("/api/post", (req, res) => {
+  const { firstname, lastname, gender, position, dofa } = req.body;
+  const sqlInsert =
+    "INSERT INTO staff (firstname, lastname, gender, position, dofa) VALUES ('Gerald', 'Maduabuchi', 'Male', 'Engineer', '21-06-08')";
+  connection.query(sqlInsert, function (error, sqlInsert) {
+    if (error) {
+      console.log(error.message);
+    }
+    res.send(sqlInsert);
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
