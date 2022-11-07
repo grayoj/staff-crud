@@ -24,3 +24,5 @@ Run `npm i sequelize`
 ## Step 5
 
 Set up the database configuration
+
+tbc
