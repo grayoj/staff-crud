@@ -65,10 +65,10 @@ app.get("/", (req, res) => {
 I strongly recommend you use Postman to work with these endpoints.
 The endpoints included in this project include:
 
-GET - http://localhost:5000/staff, by sending a GET request to the route "/staff" the api returns all records in the database.
-POST - http://localhost:5000/staff, by sending a POST request to the route "/staff" the api stores a new record
-PUT - http://localhost:5000/staff/:id, by sending a PUT request to the route "/staff" the api updates a new record
-DELETE - http://localhost:5000/staff/:id, by sending a DELETE request to the route "/staff" the api deletes a new record.
+1. GET - http://localhost:5000/staff, by sending a GET request to the route "/staff" the api returns all records in the database.
+2. POST - http://localhost:5000/staff, by sending a POST request to the route "/staff" the api stores a new record
+3. PUT - http://localhost:5000/staff/:id, by sending a PUT request to the route "/staff" the api updates a new record
+4. DELETE - http://localhost:5000/staff/:id, by sending a DELETE request to the route "/staff" the api deletes a new record.
 
 Let us dissect this piece of code as a sample for the other requests made:
 
