@@ -404,3 +404,5 @@ We employ the `put` method to the specific id fused into the URL.
 ## Step 22
 
 Building our sever and client for deployment and dockerization of our application.
+
+<img src="image/arch.jp">
