@@ -21,7 +21,7 @@ input[type='submit']{
     cursor: pointer;
 }
 
-input[type='button'] {
+button {
     width: 100%;
     background-color: black;
     color: white;
@@ -36,4 +36,18 @@ input[type='button'] {
 
 input[type='submit']:hover{
     background-color: green ;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    align-items: center;
+    height: 100vh;
+  padding: 0 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
