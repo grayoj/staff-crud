@@ -2,26 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../pages/Styles.css";
-
-import { toast } from "react-toastify";
-// Import CSV library
-// import { CSVDownload } from "react-csv";
-// import { FaFileExport, FaFile } from "react-icons/fa";
-
-// sample exports
-// const csvData = [
-//   ["example", "example"],
-//   ["example", "example"],
-//   ["example", "example"],
-//   ["example", "example"],
-// ];
-
-// const csvData = [
-//   ["firstname", "lastname", "email"],
-//   ["Ahmed", "Tomi", "ah@smthing.co.com"],
-//   ["Raed", "Labes", "rl@smthing.co.com"],
-//   ["Yezzi", "Min l3b", "ymin@cocococo.com"],
-// ];
+import { CSVDownload } from "react-csv";
+import { FaFileExport } from "react-icons/fa";
 
 const Staff = () => {
   const [staff, setStaff] = useState([]);
@@ -31,6 +13,7 @@ const Staff = () => {
       try {
         const response = await axios.get("http://localhost:5000/staff");
         setStaff(response.data);
+        // var CsvData = [response.data];
       } catch (error) {
         console.log(error);
       }
@@ -69,9 +52,9 @@ const Staff = () => {
             </tr>
           </thead>
           <tbody>
-            {staff.map((item, index) => (
+            {staff.map((item) => (
               <tr key={item.id}>
-                <th scope='row'>{index + 1}</th>
+                <th scope='row'>{item.id}</th>
                 <td>{item.firstname}</td>
                 <td>{item.lastname}</td>
                 <td>{item.gender}</td>
@@ -91,17 +74,17 @@ const Staff = () => {
           </tbody>
         </table>
         <div style={{ margin: "auto", width: "12%", marginTop: "3rem" }}>
-          {/* <button className='btn btn-export-to-csv'>
+          <button className='btn btn-export-to-csv'>
             Export to CSV <FaFileExport />
-            <CSVDownload data={csvData} />
+            {/* <CSVDownload data={csvData} /> */}
           </button>
         </div>
-        <div style={{ margin: "auto", width: "12%", marginTop: "3rem" }}>
+        {/* <div style={{ margin: "auto", width: "12%", marginTop: "3rem" }}>
           <button className='btn btn-export-to-pdf'>
             Export to PDF <FaFile />
             <CSVDownload data={csvData} target='_blank' />
-          </button> */}
-        </div>
+          </button> 
+        </div> */}
       </div>
     </div>
   );
