@@ -26,7 +26,7 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 9000:9000d
+      - 9000:9000
   mysqldb:
     image: mysql:8.0
     restart: unless-stopped

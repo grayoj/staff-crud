@@ -599,3 +599,12 @@ services:
 volumes:
   db:
 ```
+
+To build your dockerfile.
+Run:
+
+```shell
+ocker-compose -f docker/docker-compose.yml up -d
+```
+
+This triggers the docker-engine to spin up containers for the image.
