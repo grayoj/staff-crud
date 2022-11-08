@@ -536,3 +536,19 @@ env
 .enc
 node_modules
 ```
+
+Then uninstall nodemon
+
+## Step 31
+
+Install dotenv using:
+
+```npm
+npm install dotenv
+```
+
+Then append the import to index.js
+
+```javascript
+require("dotenv");
+```
