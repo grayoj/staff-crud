@@ -2,10 +2,31 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../pages/Styles.css";
-import { CSVDownload } from "react-csv";
-import { FaFileExport } from "react-icons/fa";
+// import { CSVDownload } from "react-csv";
+import { FaFileExport, FaFile } from "react-icons/fa";
+import Pdf from "react-to-pdf";
+
+const ref = React.createRef();
 
 const Staff = () => {
+  // Define data
+  // const [csv, setCsv] = useState([]);
+
+  // const downloadCsv = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:5000/staff");
+  //     setCsv(response.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  //   console.log(csv);
+  // };
+  const [dataInCSV, setDataInCSV] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/staff").then((res) => setDataInCSV(res));
+  }, []);
+
   const [staff, setStaff] = useState([]);
 
   useEffect(() => {
@@ -13,7 +34,6 @@ const Staff = () => {
       try {
         const response = await axios.get("http://localhost:5000/staff");
         setStaff(response.data);
-        // var CsvData = [response.data];
       } catch (error) {
         console.log(error);
       }
@@ -33,9 +53,9 @@ const Staff = () => {
   };
 
   return (
-    <div>
+    <div ref={ref}>
       <div style={{ margin: "auto", width: "10%", marginTop: "6rem" }}>
-        <Link to='/AddStaff'>
+        <Link to='/add'>
           <button className='btn btn-contact'>Add Staff</button>
         </Link>
       </div>
@@ -74,17 +94,28 @@ const Staff = () => {
           </tbody>
         </table>
         <div style={{ margin: "auto", width: "12%", marginTop: "3rem" }}>
+          {dataInCSV && (
+            <a
+              href={`data:text/csv;charset=utf-8,${escape(dataInCSV)}`}
+              download='filename.csv'
+            >
+              download
+            </a>
+          )}
           <button className='btn btn-export-to-csv'>
             Export to CSV <FaFileExport />
-            {/* <CSVDownload data={csvData} /> */}
+            {/* <CSVDownload onClick={downloadCsv} /> */}
           </button>
         </div>
-        {/* <div style={{ margin: "auto", width: "12%", marginTop: "3rem" }}>
-          <button className='btn btn-export-to-pdf'>
-            Export to PDF <FaFile />
-            <CSVDownload data={csvData} target='_blank' />
-          </button> 
-        </div> */}
+        <div style={{ margin: "auto", width: "12%", marginTop: "3rem" }}>
+          <Pdf targetRef={ref} filename='report.pdf'>
+            {({ toPdf }) => (
+              <button onClick={toPdf} className='btn btn-export-to-pdf'>
+                Generate Pdf <FaFile />
+              </button>
+            )}
+          </Pdf>
+        </div>
       </div>
     </div>
   );

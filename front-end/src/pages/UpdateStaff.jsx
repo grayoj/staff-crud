@@ -14,6 +14,8 @@ const UpdateStaff = () => {
   const [error, setError] = useState(false);
 
   const location = useLocation();
+
+  // useNavigation
   const navigate = useNavigate();
 
   const staffId = location.pathname.split("/")[2];
