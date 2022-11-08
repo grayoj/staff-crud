@@ -406,3 +406,118 @@ We employ the `put` method to the specific id fused into the URL.
 Building our sever and client for deployment and dockerization of our application.
 
 <img src="image/arch.jp">
+
+## Step 23
+
+Create a production and development branch
+
+## Step 24
+
+In your terminal, run
+
+```git
+git branch
+```
+
+If you see just one branch run
+
+```git
+git branch -a
+```
+
+Shows all branches. Now to switch to the production branch we intend
+to deploy:
+
+run
+
+```git
+git checkout master
+```
+
+To know the branch you are on.
+Now run
+
+```git
+git checkout -b <branch>
+```
+
+The -b flag stands for branch
+
+Once that is done, you can proceed to dockerizing the application.
+
+## Step 26
+
+Create a .dockerfile-front-end. You can do this on Linux/Unix or through the
+terminal using the touch command.
+That is:
+
+```shell
+touch .dockerfile.front-end
+```
+
+Or just create manually.
+
+## Step 27
+
+Open up the docker file and add the following FOR OUR FRONTEND:
+
+```docker
+FROM node:16
+```
+
+So our image would use a minimum of node js, version 16.
+
+Define our Working Directory
+
+```docker
+WORKDIR /back-end
+```
+
+Copy the package.json in the backend, and front-end
+This command goes to the local host machine and copies the package.json files that include the dependencies to our image.
+
+```docker
+COPY ./package.json ./package.json
+COPY ./public ./public
+```
+
+Then copy the source folder.
+
+```docker
+COPY ./src ./src
+```
+
+Run Yarn Install to install the dependencies
+
+```docker
+RUN yarn install
+```
+
+Expose the Docker PORT
+
+Then you have to Run Yarn Start using Docker's CMD command:
+
+```docker
+CMD ["yarn", "start"]
+```
+
+## Step 28
+
+Dockerize the Nodejs app, by creating a dockerfile for it as above.
+
+Then what you should have is:
+
+```docker
+FROM node:16
+WORKDIR /back-end
+COPY ./package.json ./package.json
+COPY ./index. js ./index.js
+RUN npm install
+EXPOSE 9000
+CMD ["node", "index.js"]
+```
+
+## Step 29
+
+You can use the Docker extension GUI.
+Type Control + Shift + P
