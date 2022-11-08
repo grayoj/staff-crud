@@ -18,4 +18,4 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 9000:9000
+      - 9000:9000d

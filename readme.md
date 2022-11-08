@@ -521,3 +521,18 @@ CMD ["node", "index.js"]
 
 You can use the Docker extension GUI.
 Type Control + Shift + P
+
+Just follow the instructions for nodejs
+
+## Step 30
+
+Before building the image, configure your nodejs for production.
+Create an .env file.
+
+Once you have created that, set up a .gitignore file and add these:
+
+```gitignore
+env
+.enc
+node_modules
+```
