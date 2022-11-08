@@ -552,3 +552,50 @@ Then append the import to index.js
 ```javascript
 require("dotenv");
 ```
+
+Set up a docker-compose using this sample configuration below
+
+```yml
+version: "3.4"
+
+services:
+  backend:
+    depends_on:
+      - mysqldb
+    image: backend
+    build:
+      context: back-end
+      dockerfile: ./Dockerfile
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+    stdin_open: true
+    tty: true
+    ports:
+      - 9000:9000
+  frontend:
+    image: frontend
+    build:
+      context: front-end
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 9000:9000d
+  mysqldb:
+    image: mysql:8.0
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - db:/var/lib/mysql
+volumes:
+  db:
+```
